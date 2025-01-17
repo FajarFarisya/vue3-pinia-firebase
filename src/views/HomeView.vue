@@ -51,6 +51,31 @@ const increaseCounter = amount => {
 const decreaseCounter = amount => {
   counterData.count -= amount;
 };
+
+// onBeforeUpdate(() => {
+//   console.log("beforeUpdate");
+// });
+// onUpdated(() => {
+//   console.log("updated");
+// })
+// onBeforeMount(() => {
+//   console.log("beforeMount");
+// })
+// onMounted(() => {
+//   console.log("mounted");
+// });
+// onBeforeUnmount(() => {
+//   console.log("beforeUnmount");
+// })
+// onUnmounted(() => {
+//   console.log("unmounted");
+// })
+// onActivated(() => {
+//   console.log("activated");
+// })
+// onDeactivated(() => {
+//   console.log("deactivated");
+// })
 </script>
 <style scoped>
 .home {
