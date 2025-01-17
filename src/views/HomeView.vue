@@ -3,10 +3,14 @@
     <h2>{{ appTitle }}</h2>
     <h3>{{ counterData.title }}</h3>
     <div>
-      <button @click="decreaseCounter" class="btn">-</button>
+      <button @click="decreaseCounter(2)" class="btn">--</button>
+      <button @click="decreaseCounter(1)" class="btn">-</button>
       <span class="counter">{{ counterData.count }}</span>
-      <button @click="increaseCounter" class="btn">+</button>
+      <button @click="increaseCounter(1)" class="btn">+</button>
+      <button @click="increaseCounter(2)" class="btn">++</button>
     </div>
+
+    <p>This counter is {{ addOrEven }}</p>
 
     <div class="edit">
       <h4>Edit Counter title:</h4>
@@ -15,7 +19,7 @@
   </div>
 </template>
 <script setup>
-import { reactive } from "vue";
+import { computed, reactive, watch } from "vue";
 
 const appTitle = "My Counter App";
 // const counter = ref(0),
@@ -26,54 +30,28 @@ const counterData = reactive({
   title: "My Counter",
 });
 
-const increaseCounter = () => {
-  counterData.count++;
+// watcher
+watch(() => counterData.count, (newCount) => {
+  if (newCount === 20) {
+    alert("Way to go! You made it to 20!");
+  }
+})
+
+// computed
+const addOrEven = computed(() => {
+  if (counterData.count % 2 === 0)
+  return "Even";
+  else return "Odd";
+});
+
+const increaseCounter = amount => {
+  counterData.count += amount;
 };
 
-const decreaseCounter = () => {
-  counterData.count--;
+const decreaseCounter = amount => {
+  counterData.count -= amount;
 };
 </script>
-<!--
-<script>
-import { ref } from 'vue'
-export default {
-  setup() {
-    const counter = ref(0)
-    const increaseCounter = () => {
-      counter.value++
-    }
-    const decreaseCounter = () => {
-      counter.value--
-    }
-    return {
-      counter,
-      increaseCounter,
-      decreaseCounter,
-    }
-  },
-}
-</script>
--->
-<!--
-<script>
-export default {
-  data() {
-    return {
-      counter: 0,
-    }
-  },
-  methods: {
-    increaseCounter() {
-      this.counter++
-    },
-    decreaseCounter() {
-      this.counter--
-    },
-  }
-}
-</script>
--->
 <style scoped>
 .home {
   text-align: center;
